@@ -9,6 +9,7 @@ const nextConfig = {
       ...config.resolve.alias,
       snarkyjs: require('path').resolve('node_modules/snarkyjs'),
     }
+    config.optimization.minimizer = [];
     return config;
   },
   // To enable SnarkyJS for the web, we must set the COOP and COEP headers.
@@ -29,7 +30,12 @@ const nextConfig = {
         ],
       },
     ];
-  }
+  },
+  images: {
+    unoptimized: true,
+  },
+  basePath: process.env.NODE_ENV === 'production' ? '/04-zkapp-browser-ui' : undefined, // update if your repo name changes for 'npm run deploy' to work successfully
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/04-zkapp-browser-ui/' : undefined, // update if your repo name changes for 'npm run deploy' to work successfully
 };
 
 module.exports = nextConfig
